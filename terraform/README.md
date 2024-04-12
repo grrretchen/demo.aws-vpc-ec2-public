@@ -1,3 +1,6 @@
+inspired by https://learn.acloud.guru/handson/5b14955f-1d70-4a0a-9a11-61858fb5e17c
+
+
 Create a VPC
 
 Navigate to the VPC console. 
