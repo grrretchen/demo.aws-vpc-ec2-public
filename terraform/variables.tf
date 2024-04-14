@@ -1,4 +1,4 @@
-variable "project_name" {
-  type    = string
-  default = "demo-terraform-aws-vpc-ec2-public"
+variable "aws_region" {
+  type = string
+  default = "us-east-2"
 }

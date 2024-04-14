@@ -3,10 +3,11 @@ resource "aws_vpc" "main" {
   cidr_block       = "${var.vpc_cidr}"
   instance_tenancy = "default"
 
-  tags = {
-    Name          = "my-vpc"
-    ResourceGroup = var.resource_group_name
-  }
+  tags = merge(
+    module.tags.tags, {
+      Name = format("%s-%s", var.project_name, "vpc")
+    }
+  )
 }
 
 
@@ -17,17 +18,21 @@ resource "aws_subnet" "public" {
 
   map_public_ip_on_launch = true
 
-  tags = {
-    Name = "my-public-subnet"
-  }
+  tags = merge(
+    module.tags.tags, {
+      Name = format("%s-%s", var.project_name, "public")
+    }
+  )
 }
 
 
 # VPC Internet Gateway
 resource "aws_internet_gateway" "main" {
-  tags = {
-    Name = "my-internet-gateway"
-  }
+  tags = merge(
+    module.tags.tags, {
+      Name = format("%s-%s", var.project_name, "gateway")
+    }
+  )
 }
 
 
@@ -42,9 +47,11 @@ resource "aws_internet_gateway_attachment" "main" {
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
 
-  tags = {
-    Name = "public-routetable"
-  }
+  tags = merge(
+    module.tags.tags, {
+      Name = format("%s-%s", var.project_name, "rt-public")
+    }
+  )
 }
 
 

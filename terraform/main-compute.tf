@@ -11,11 +11,11 @@ resource "aws_instance" "spec_webserver" {
   user_data_base64            = base64encode(data.local_file.userdata.content)
   user_data_replace_on_change = false
 
-  tags = {
-    Name    = "Webserver"
-    Project = var.project_name
-  }
-
+  tags = merge(
+    module.tags.tags, {
+      Name = format("%s-%s", var.project_name, "webserver")
+    }
+  )
 }
 
 # EC2 User Data
@@ -31,9 +31,13 @@ data "local_file" "sshkey" {
 
 
 resource "aws_key_pair" "keypair" {
-  key_name_prefix = var.project_name
+  key_name_prefix = format("%s-", var.project_name)
   public_key      = data.local_file.sshkey.content
 
+  tags = merge(
+    module.tags.tags,
+    {}
+  )
 }
 
 
@@ -73,4 +77,10 @@ resource "aws_security_group" "webserver" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = merge(
+    module.tags.tags, {
+      Name = format("%s-%s", var.project_name, "webserver")
+    }
+  )
 }
