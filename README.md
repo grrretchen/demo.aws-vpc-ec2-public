@@ -1,13 +1,41 @@
-# demo.aws-external-dns-to-ec2
-Documentation and example for connecting an external DNS service to an EC2 instance
+# demo.terraform-aws-vpc-ec2-public
 
-# Problem Statement:
-I have purchased a domain from namecheap and I need to connect it to my AWS EC2 instance with AWS Route 53. I have followed the instructions  is Namecheap’s and it’s not working (it’s been over two days).
+---
 
-# Preconditions
-- An domain name purchased from a third party
-- An active ec2 instance running in AWS
+This project demonstrates a Terraform project which deploys new EC2 and VPC resources into an AWS account.
 
+### Goals:
+- Demonstrate a one-touch infrastructure-as-code project for provisioning resources
+- Demonstrate a file-naming structure for organizing resource definitions
+- Demonstrate a tagging strategy
 
-# Solution
-Inspired by https://www.upwork.com/jobs/~01f1f6cb6919743f7e
+### Resources created:
+- Networking to enable public hosting
+  - VPC
+  - Public Subnet
+  - Internet Gateway
+  - Route Table
+- Compute instance with basic Nginx "Hello World" webserver.
+  - EC2
+    - with "userdata" startup script
+  - Security Group with ingress rules
+
+### Engineering Standards:
+- Defined using Terraform 
+- Follows Terraform Style Guide:
+  - https://developer.hashicorp.com/terraform/language/style 
+
+### Usage:
+- Preconditions:
+  - AWS account
+  - AWS environment variables are set up in terminal
+    - `AWS_ACCESS_KEY_ID`
+    - `AWS_SECRET_ACCESS_KEY` 
+    - `AWS_SESSION_TOKEN`
+  - Terraform installed locally
+
+### Execution:
+  - `cd terraform`
+  - `terraform plan`
+  - `terraform apply`
+  - `terraform destroy`
