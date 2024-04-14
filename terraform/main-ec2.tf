@@ -1,4 +1,39 @@
-# Creating Security Group
+resource "aws_instance" "spec_webserver" {
+
+  ami                    = var.ami
+  instance_type          = var.instance_type
+  key_name               = aws_key_pair.keypair.id
+  subnet_id              = aws_subnet.public.id
+  vpc_security_group_ids = [aws_security_group.webserver.id]
+
+  associate_public_ip_address = true
+
+  tags = {
+    Name    = "Webserver"
+    Project = var.project_name
+  }
+
+  user_data_base64 = base64encode(data.local_file.userdata.content)
+#   user_data                   = data.local_file.userdata.content
+  user_data_replace_on_change = true
+  #   EOF
+
+  #   user_data = <<-EOF
+  #       #!/bin/bash
+  #       # Use this for your user data (script from top to bottom)
+  #       # install httpd (Linux 2 version)
+  #       yum update -y
+  #       yum install -y httpd
+  #       systemctl start httpd
+  #       systemctl enable httpd
+  #       echo "<h1>Hello World from $(hostname -f)</h1>" > /var/www/html/index.html
+  #     EOF
+}
+
+# EC2 User Data
+data "local_file" "userdata" {
+  filename = "${path.module}/userdata.txt"
+}
 
 
 # EC2 Key Pair
