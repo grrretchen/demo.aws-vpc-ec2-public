@@ -1,6 +1,5 @@
 inspired by https://learn.acloud.guru/handson/5b14955f-1d70-4a0a-9a11-61858fb5e17c
 
-
 Create a VPC
 
 Navigate to the VPC console. 
@@ -27,5 +26,4 @@ Note: You may notice there is already a default route table created for you asso
 Launch EC2 Instance in Subnet
   - Launch an EC2 instance in your subnet.
   - Select Amazon Linux 2 AMI, 64-bit (x86), t2.micro.
-
-Create a new key pair.
+  - Create a new key pair.
