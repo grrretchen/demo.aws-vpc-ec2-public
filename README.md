@@ -2,6 +2,8 @@
 
 ---
 
+![demo.terraform-aws-vpc-ec2-public.png](demo.terraform-aws-vpc-ec2-public.png)
+
 This project demonstrates a Terraform project which deploys new EC2 and VPC resources into an AWS account.
 
 ### Goals:
